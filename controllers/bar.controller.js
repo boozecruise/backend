@@ -22,3 +22,24 @@ exports.bar_create = function (req, res) {
         res.send('Product Created successfully')
     })
 };
+
+exports.bar_details = function (req, res) {
+    Bar.findById(req.params.id, function (err, product) {
+        if (err) return next(err);
+        res.send(product);
+    })
+};
+
+exports.bar_update = function (req, res) {
+    Bar.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, bar) {
+        if (err) return next(err);
+        res.send('Bar updated.');
+    })
+};
+
+exports.bar_delete = function (req, res) {
+    Bar.findByIdAndRemove(req.params.id, function (err) {
+        if (err) return next(err);
+        res.send('Deleted successfully!');
+    })
+};
